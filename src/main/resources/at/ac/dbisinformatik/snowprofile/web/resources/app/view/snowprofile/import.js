@@ -2,7 +2,7 @@ Ext.define('LWD.view.snowprofile.import', {
 	extend : 'Ext.window.Window',
 	alias : 'widget.import',
 
-	title : 'XML Import',
+	title : 'XML-Import',
 	layout : 'fit',
 	autoShow : true,
 
@@ -12,7 +12,7 @@ Ext.define('LWD.view.snowprofile.import', {
 			items : [ {
 				xtype : 'filefield',
 				name : 'import',
-				fieldLabel : 'XML Import',
+				fieldLabel : 'XML-Import',
 				labelWidth : 100,
 				msgTarget : 'side',
 				allowBlank : false,

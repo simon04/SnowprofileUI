@@ -10,15 +10,15 @@ Ext.define('LWD.view.menuleiste.Menu', {
 			Ext.History.add(newToken);
 		}
 	}, "-", {
-		text : 'PDF drucken',
+		text : 'PDF-Export',
 		reorderable : false,
 		id : 'printPDF'
 	}, "-", {
-		text : 'PNG drucken',
+		text : 'PNG-Export',
 		reorderable : false,
 		id : 'printPNG'
 	}, "-", {
-		text : 'XML Export',
+		text : 'XML-Export',
 		reorderable : false,
 		id : 'exportXML'
 	}, "-", {
