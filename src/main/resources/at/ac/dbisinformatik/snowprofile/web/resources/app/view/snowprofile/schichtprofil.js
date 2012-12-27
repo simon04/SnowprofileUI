@@ -52,19 +52,14 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
                 switch(value) {
                     case "D":
                         return "trocken";
-                        break;
                     case "M":
                         return "schwach feucht";
-                        break;
                     case "W":
                         return "feucht";
-                        break;
                     case "V":
                         return "nass";
-                        break;
                     case "S":
                         return "sehr nass";
-                        break;
                 }
             },
             flex: 1,
@@ -92,37 +87,26 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
                 switch(value) {
                     case "PP":
                         return "Neuschnee";
-                        break;
                     case "DF":
                         return "filziger Schnee";
-                        break;
                     case "RG":
                         return "rundkörniger Schnee";
-                        break;
                     case "FC":
                         return "kantigförmiger Schnee";
-                        break;
                     case "FCxr":
                         return "kantig abgerundet";
-                        break;
                     case "DH":
                         return "Schwimmschnee";
-                        break;
                     case "MF":
                         return "Schmelzform";
-                        break;
                     case "MFcr":
                         return "Schneekruste";
-                        break;
                     case "IF":
                         return "Eislamelle";
-                        break;
                     case "SH":
                         return "Oberflächenreif";
-                        break;
                     case "PPgp":
                         return "Graupel";
-                        break;
                 }
             },
             flex: 1,
@@ -156,37 +140,26 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
                 switch(value) {
                     case "PP":
                         return "Neuschnee";
-                        break;
                     case "DF":
                         return "filziger Schnee";
-                        break;
                     case "RG":
                         return "rundkörniger Schnee";
-                        break;
                     case "FC":
                         return "kantigförmiger Schnee";
-                        break;
                     case "FCxr":
                         return "kantig abgerundet";
-                        break;
                     case "DH":
                         return "Schwimmschnee";
-                        break;
                     case "MF":
                         return "Schmelzform";
-                        break;
                     case "MFcr":
                         return "Schneekruste";
-                        break;
                     case "IF":
                         return "Eislamelle";
-                        break;
                     case "SH":
                         return "Oberflächenreif";
-                        break;
                     case "PPgp":
                         return "Graupel";
-                        break;
                 }
             },
             flex: 1,
@@ -235,34 +208,24 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
                 switch(value) {
                     case "F":
                         return "FA - sehr weich";
-                        break;
                     case "F-4F":
                         return "F-4F";
-                        break;
                     case "4F":
                         return "4F - weich";
-                        break;
                     case "4F-1F":
                         return "4F-1F";
-                        break;
                     case "1F":
                         return "1F - mittelhart";
-                        break;
                     case "1F-P":
                         return "1F-P";
-                        break;
                     case "P":
                         return "B - hart";
-                        break;
                     case "P-K":
                         return "P-K";
-                        break;
                     case "K":
                         return "M - sehr hart";
-                        break;
                     case "I":
                         return "Eis - kompakt";
-                        break;
                 }
             },
             flex: 1,
