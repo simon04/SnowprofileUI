@@ -54,18 +54,19 @@ function getJSON(store, pdfFlag, drawComponent)  {
 		var windgeschw = checkObjectDraw(store.snowProfileResultsOf.SnowProfileMeasurements.windSpd.content);
 		var sonstiges = checkObjectDraw(store.snowProfileResultsOf.SnowProfileMeasurements.comment);
 		
+		// TODO remove duplication, cf. app/view/ComboBox.js
 		switch(bewoelkung) {
 			case "CLR":
 				bewoelkung = "wolkenlos (0/8)";
 				break;
 			case "FEW":
-				bewoelkung = "leicht bewölkt (1/8 - 2/8)";
+				bewoelkung = "leicht bewölkt (1/8–2/8)";
 				break;
 			case "SCT":
-				bewoelkung = "bewölkt (3/8 - 4-8)";
+				bewoelkung = "bewölkt (3/8–4/8)";
 				break;
 			case "BKN":
-				bewoelkung = "stark bewölkt (5/8 - 7/8)";
+				bewoelkung = "stark bewölkt (5/8–7/8)";
 				break;
 			case "OVC":
 				bewoelkung = "bedeckt (8/8)";
@@ -95,16 +96,16 @@ function getJSON(store, pdfFlag, drawComponent)  {
 				windgeschw = "kein Wind (0 km/h)";
 				break;
 			case "1_20":
-				windgeschw = "schwacher Wind (1-20 km/h)";
+				windgeschw = "schwacher Wind (1–20 km/h)";
 				break;
 			case "20_40":
-				windgeschw = "mäßiger Wind (20-40 km/h)";
+				windgeschw = "mäßiger Wind (20–40 km/h)";
 				break;
 			case "40_60":
-				windgeschw = "starker Wind (40-60 km/h)";
+				windgeschw = "starker Wind (40–60 km/h)";
 				break;
 			case "60_100":
-				windgeschw = "stürmischer Wind (60-100 km/h)";
+				windgeschw = "stürmischer Wind (60–100 km/h)";
 				break;
 			case "100":
 				windgeschw = "schwerer Wind/Orkan (>100 km/h)";
@@ -130,13 +131,13 @@ function getJSON(store, pdfFlag, drawComponent)  {
 		items.push(drawText("Wetter/Niederschlag: "+niederschlag, yMetaDataFirstColumn+"%", "6%", 0, "#000000", fontSize));
 		items.push(drawText("Koordinaten: "+koordinaten, yMetaDataFirstColumn+"%", "7.5%", 0, "#000000", fontSize));
 		
-		items.push(drawText("Ort: "+ort+" - "+region, yMetaDataSecondColumn+"%", "3%", 0, "#000000", fontSize));
+		items.push(drawText("Ort: "+[ort, region].filter(function(i){return !!i;}).join(', '), yMetaDataSecondColumn+"%", "3%", 0, "#000000", fontSize));
 		items.push(drawText("Höhe ü. M.: "+hoeheUM, yMetaDataSecondColumn+"%", "4.5%", 0, "#000000", fontSize));
 		items.push(drawText("Exposition: "+exposition, yMetaDataSecondColumn+"%", "6%", 0, "#000000", fontSize));
-		items.push(drawText("Wind: "+windrichtung+" / "+windgeschw, yMetaDataSecondColumn+"%", "7.5%", 0, "#000000", fontSize));
+		items.push(drawText("Wind: "+[windrichtung, windgeschw].filter(function(i){return !!i;}).join(' / '), yMetaDataSecondColumn+"%", "7.5%", 0, "#000000", fontSize));
 		
 		items.push(drawText("Datum/Zeit: "+datum+" "+zeit, yMetaDataThirdColumn+"%", "3%", 0, "#000000", fontSize));
-		items.push(drawText("Lufttemp.: "+lufttemperatur+" °C", yMetaDataThirdColumn+"%", "4.5%", 0, "#000000", fontSize));
+		items.push(drawText("Lufttemperatur: "+(lufttemperatur?lufttemperatur+" °C":''), yMetaDataThirdColumn+"%", "4.5%", 0, "#000000", fontSize));
 		items.push(drawText("Bewölkung: "+bewoelkung, yMetaDataThirdColumn+"%", "6%", 0, "#000000", fontSize));
 		
 		items.push(drawText("Sonstiges: "+sonstiges, yMetaDataFirstColumn+"%", "10.5%", 0, "#000000", fontSize));
@@ -158,7 +159,7 @@ function getJSON(store, pdfFlag, drawComponent)  {
 	items.push(drawImage(widthImage, heightImage, (22.4 - pdfMarginX)+"%", yLegendFirstRowImage+"%", "data/img/filziger_schnee.jpg", pdfFlag));
 	items.push(drawText("Filz", (23.9 - pdfMarginX)+"%", yLegendFirstRow+"%", 0, "#000000", fontSize));
 	items.push(drawImage(widthImage, heightImage, (26.6 - pdfMarginX)+"%", yLegendFirstRowImage+"%", "data/img/rundkoerniger_schnee.jpg", pdfFlag));
-	items.push(drawText("kleine Runde", (28 - pdfMarginX)+"%", yLegendFirstRow+"%", 0, "#000000", fontSize));
+	items.push(drawText("Rundkorn", (28 - pdfMarginX)+"%", yLegendFirstRow+"%", 0, "#000000", fontSize));
 	items.push(drawImage(widthImage, heightImage, (34.4 - pdfMarginX)+"%", yLegendFirstRowImage+"%", "data/img/kantigfoermiger_schnee.jpg", pdfFlag));
 	items.push(drawText("kantig", (35.9 - pdfMarginX)+"%", yLegendFirstRow+"%", 0, "#000000", fontSize));
 	items.push(drawImage(widthImage, heightImage, (39.2 - pdfMarginX)+"%", yLegendFirstRowImage+"%", "data/img/schwimmschnee.jpg", pdfFlag));
@@ -242,7 +243,7 @@ function getJSON(store, pdfFlag, drawComponent)  {
 				var kornform1 = schichtprofilData[i].grainFormPrimary;
 				var kornform2 = schichtprofilData[i].grainFormSecondary;
 				var haerte = schichtprofilData[i].hardness;
-				var groesse = schichtprofilData[i].grainSize_Components_avg+"-"+schichtprofilData[i].grainSize_Components_avgMax;
+				var groesse = schichtprofilData[i].grainSize_Components_avg+"–"+schichtprofilData[i].grainSize_Components_avgMax;
 				if(schichtprofilData[i].grainSize_Components_avg > 1)
 					nietenText = nietenText+"*";
 				var feuchte = schichtprofilData[i].lwc_content;
