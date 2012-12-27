@@ -35,7 +35,7 @@ Ext.define('LWD.view.snowprofile.snowtemperature' ,{
     
     columns: [
 		{
-			header: 'Von Höhe[cm]',
+			header: 'Oberkante [cm]',
 			dataIndex: 'depth',
 			flex: 1,
 			editor: {
@@ -45,7 +45,7 @@ Ext.define('LWD.view.snowprofile.snowtemperature' ,{
 			}
 		},
 		{
-			header: 'Temperatur[°C]',
+			header: 'Temperatur [°C]',
 			dataIndex: 'snowTemp',
 			renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
 				if(value != 0) return "-"+value;
