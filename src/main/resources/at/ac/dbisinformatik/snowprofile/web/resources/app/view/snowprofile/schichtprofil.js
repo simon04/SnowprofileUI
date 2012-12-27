@@ -35,7 +35,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
 
     columns: [
         {
-            header: 'Oberkante [cm]',
+            header: '<b>[H]</b><br>Oberkante [cm]',
             id: 'depthTop_content',
             dataIndex: 'depthTop_content',
             flex: 1,
@@ -46,7 +46,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[Θ]</b> Feuchte',
+            header: '<b>[Θ]</b><br>Feuchte',
             dataIndex: 'lwc_content',
             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
                 switch(value) {
@@ -80,7 +80,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[F1]</b> Kornform 1',
+            header: '<b>[F<sup>1</sup>]</b><br>Kornform 1',
             sortable: false,
             dataIndex: 'grainFormPrimary',
             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
@@ -134,7 +134,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[F2]</b> Kornform 2',
+            header: '<b>[F<sup>2</sup>]</b><br>Kornform 2',
             dataIndex: 'grainFormSecondary',
             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
                 switch(value) {
@@ -186,7 +186,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[D–]</b> min. Größe [mm]',
+            header: '<b>[D–]</b><br>min. Größe [mm]',
             dataIndex: 'grainSize_Components_avg',
             flex: 1,
             editor: {
@@ -194,7 +194,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[–D]</b> max. Größe [mm]',
+            header: '<b>[–D]</b><br>max. Größe [mm]',
             dataIndex: 'grainSize_Components_avgMax',
             flex: 1,
             editor: {
@@ -202,7 +202,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[K]</b> Härte',
+            header: '<b>[K]</b><br>Härte',
             dataIndex: 'hardness',
             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
                 switch(value) {
