@@ -57,6 +57,6 @@ public class SearchSnowProfileResource extends ServerResource {
 	 */
 	@Post()
 	public String getJsonPost(Representation value) throws JSONException, IOException, ParseException {
-		return "{SnowprofileList: " + SchichtprofilDAO.getSnowProfilesBySearch(db, new JSONObject(value.getText())).toString() + "}";
+		return "{\"SnowprofileList\": " + SchichtprofilDAO.getSnowProfilesBySearch(db, new JSONObject(value.getText())).toString() + "}";
 	}
 }
