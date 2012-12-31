@@ -71,9 +71,8 @@
                             <xsl:when test="$precipTI='Graupel'">GS</xsl:when>
                         </xsl:choose>
                     </precipTI>
-                    <!-- TODO replace comma by dot (decimal separator) -->
                     <airTempPres uom="degC">
-                        <xsl:value-of select="SPP-Profil/Kopf/Temperatur"/>
+                        <xsl:value-of select="translate(SPP-Profil/Kopf/Temperatur,',','.')"/>
                     </airTempPres>
                     <windSpd uom="ms-1">
                         <xsl:value-of select="SPP-Profil/Kopf/WindStaerke div 3.6"/>
