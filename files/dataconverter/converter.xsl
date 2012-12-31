@@ -257,6 +257,15 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--Location information -->
 	<locRef>
 		<ObsPoint gml:id="op0">
+			<metaDataProperty>
+				<MetaData>
+					<customData xmlns:lwd="http://lawine.tirol.gv.at/">
+						<lwd:location><xsl:value-of select="SPP-Profil/Kopf/Ort"/></lwd:location>
+						<lwd:region><xsl:value-of select="SPP-Profil/Kopf/Region"/></lwd:region>
+						<lwd:state><xsl:value-of select="SPP-Profil/Kopf/Bundesland"/></lwd:state>
+					</customData>
+				</MetaData>
+			</metaDataProperty>
 			<name><xsl:value-of select="SPP-Profil/Kopf/Ort"/> - <xsl:value-of select="SPP-Profil/Kopf/Region"/> - <xsl:value-of select="SPP-Profil/Kopf/Bundesland"/></name>
 			<obsPointSubType>Snowprofile Site</obsPointSubType>
 			<validElevation>
