@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="5.0.5">
+    <xs:import namespace="http://caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS"
+               schemaLocation="http://www.caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS/CAAMLv5_SnowProfileIACS.xsd"/>
+    <xs:import namespace="http://www.opengis.net/gml"
+               schemaLocation="http://www.caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS/CAAMLv5_SnowProfileIACS_GML.xsd"/>
+</xs:schema>
