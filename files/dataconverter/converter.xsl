@@ -2,17 +2,9 @@
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 <xsl:template match="/">
-<SnowProfile 
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS"
-	xmlns:caaml="http://www.caaml.org/v5.0/Snowprofile/IACS"
-	xmlns:gml="http://www.opengis.net/gml"
-	xmlns:app="http://www.snowprofileapplication.com"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS
-	http://caaml.avisualanche.ca/Schemas/V5.0/Profiles/SnowprofileIACS/CAAMLv5_SnowProfileIACS.xsd"
-	gml:id="SLF7245">
+<SnowProfile xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caaml.org/Schemas/V5.0/Profiles/SnowProfileIACS http://caaml.org/Schemas/V5.0/Profiles/SnowprofileIACS/CAAMLv5_SnowProfileIACS.xsd" gml:id="sp0">
 	<metaDataProperty>
 		<MetaData>
 			<!--NEW: dateTimeReport new required element -->
@@ -22,10 +14,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</xsl:call-template>
 			</dateTimeReport>
 			<srcRef>
-				<Operation gml:id="SLF">
+				<Operation gml:id="o0">
 					<name></name>
 					<contactPerson>
-						<Person gml:id="PersonID01">
+						<Person gml:id="p0">
 							<name><xsl:value-of select="SPP-Profil/Kopf/Beobachter"/></name>
 						</Person>
 					</contactPerson>
@@ -40,7 +32,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				<xsl:variable name="datum" select="SPP-Profil/Kopf/Datum" />
 				<xsl:variable name="zeit" select="SPP-Profil/Kopf/Zeit" />
 				<xsl:call-template name="FormatDate">
-					<xsl:with-param name="DateTime" select="concat($datum, ' ', $zeit)" />
+					<xsl:with-param name="DateTime" select="concat($datum, ' ', $zeit, ':00')" />
 				</xsl:call-template>
 			</timePosition>
 		</TimeInstant>
@@ -51,7 +43,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<!--General Comment -->
 			<comment><xsl:value-of select="SPP-Profil/Textfeld/Text"/></comment>
 			<!--Header information -->
-			<profileDepth uom="cm"><xsl:value-of select="SPP-Profil/Schichtprofil/Schicht/H"/></profileDepth>
+			<profileDepth uom="cm"><xsl:value-of select="SPP-Profil/Schichtprofil/Schicht/H div 10"/></profileDepth>
 			<skyCond>
 				<xsl:call-template name="FormatBewoelkung">
 					<xsl:with-param name="Bewoelkung" select="SPP-Profil/Kopf/Bewoelkung" />
@@ -67,6 +59,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					<xsl:when test="$precipTI='Graupel'">GS</xsl:when>
 				</xsl:choose>
 			</precipTI>
+			<!-- TODO replace comma by dot (decimal separator) -->
 			<airTempPres uom="degC"><xsl:value-of select="SPP-Profil/Kopf/Temperatur"/></airTempPres>
 			<windSpd uom="ms-1"><xsl:value-of select="SPP-Profil/Kopf/WindStaerke div 3.6"/></windSpd>
 			<windDir>
@@ -80,10 +73,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</Components>
 			</hS>
 			<!--Stratigraphic layer profile -->
+			<xsl:if test="SPP-Profil/Schichtprofil/Schicht">
 			<stratProfile>
 				<xsl:for-each select="SPP-Profil/Schichtprofil/Schicht">
 				<Layer>
-					<depthTop uom="cm"><xsl:value-of select="H"/></depthTop>
+					<depthTop uom="cm"><xsl:value-of select="H div 10"/></depthTop>
 					<grainFormPrimary>
 						<xsl:variable name="grainFormPrimary"><xsl:value-of select="F1"/></xsl:variable>
 						<xsl:choose>
@@ -118,7 +112,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<avgMax><xsl:value-of select="D2 div 100"/></avgMax>
 						</Components>
 					</grainSize>
-					<hardness>
+					<hardness uom="">
 						<xsl:variable name="hardness"><xsl:value-of select="K1"/>-<xsl:value-of select="K2"/></xsl:variable>
 						<xsl:choose>
 							<xsl:when test="$hardness='1-1'">F</xsl:when>
@@ -136,6 +130,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					<lwc uom="">
 						<xsl:variable name="lwc"><xsl:value-of select="W1"/>-<xsl:value-of select="W2"/></xsl:variable>
 						<xsl:choose>
+							<!-- TODO intermediate values missing in schichtprofil.js -->
 							<xsl:when test="$lwc='1-1'">D</xsl:when>
 							<xsl:when test="$lwc='1-2'">D-M</xsl:when>
 							<xsl:when test="$lwc='2-2'">M</xsl:when>
@@ -150,7 +145,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</Layer>
 				</xsl:for-each>
 			</stratProfile>
+			</xsl:if>
 			<!--Temperature profile -->
+			<xsl:if test="SPP-Profil/Schneetemperatur/Schicht">
 			<tempProfile uomDepth="cm" uomTemp="degC">
 				<xsl:for-each select="SPP-Profil/Schneetemperatur/Schicht">
 				<Obs>
@@ -159,9 +156,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</Obs>
 				</xsl:for-each>
 			</tempProfile>
+			</xsl:if>
 			<!--Density Profile -->
-			<densityProfile uomDepthTop="cm" uomThickness="cm"
-				uomDensity="kgm-3">
+			<xsl:if test="SPP-Profil/Dichte/Schicht">
+			<densityProfile uomDepthTop="cm" uomThickness="cm" uomDensity="kgm-3">
 				<xsl:for-each select="SPP-Profil/Dichte/Schicht">
 				<Layer>
 					<depthTop><xsl:value-of select="H div 10"/></depthTop>
@@ -170,10 +168,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</Layer>
 				</xsl:for-each>
 			</densityProfile>
+			</xsl:if>
 			<!--Ram Profile -->
-			<hardnessProfile uomHardness="N" uomThickness="cm"
-				uomDepthTop="cm" uomWeightHammer="kg" uomWeightTube="kg"
-				uomDropHeight="cm">
+			<xsl:if test="SPP-Profil/Rammwiderstand/Schicht">
+			<hardnessProfile uomHardness="N" uomThickness="cm" uomDepthTop="cm" uomWeightHammer="kg" uomWeightTube="kg" uomDropHeight="cm">
 				<xsl:if test="SPP-Profil/Rammwiderstand/Schicht">
 					<MetaData>
 						<methodOfMeas>Ram Sonde</methodOfMeas>
@@ -187,6 +185,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					</xsl:for-each>
 				</xsl:if>
 			</hardnessProfile>
+			</xsl:if>
 			<stbTests>
 				<ComprTest>
 					<xsl:variable name="komprTest">
@@ -257,7 +256,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</snowProfileResultsOf>
 	<!--Location information -->
 	<locRef>
-		<ObsPoint gml:id="SLF7242_1">
+		<ObsPoint gml:id="op0">
 			<name><xsl:value-of select="SPP-Profil/Kopf/Ort"/> - <xsl:value-of select="SPP-Profil/Kopf/Region"/> - <xsl:value-of select="SPP-Profil/Kopf/Bundesland"/></name>
 			<obsPointSubType>Snowprofile Site</obsPointSubType>
 			<validElevation>
@@ -330,26 +329,20 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template name="FormatBewoelkung">
 	<xsl:param name="Bewoelkung" />
-	<xsl:variable name="temp">
-		<xsl:value-of select="substring-after($Bewoelkung,'(')" />
-	</xsl:variable>
 	<xsl:variable name="wert">
-		<xsl:value-of select="substring-before($temp,')')" />
-	</xsl:variable>
-	<xsl:variable name="first">
-		<xsl:value-of select="substring-before($wert,'-')" />
-	</xsl:variable>
-	<xsl:variable name="second">
-		<xsl:value-of select="substring-after($wert,'-')" />
+		<xsl:value-of select="substring-before(substring-after($Bewoelkung, '('), ')')" />
 	</xsl:variable>
 	<xsl:choose>
-		<xsl:when test="$first='0/8'">CLR</xsl:when>
-		<xsl:when test="$first='1/8'">FEW</xsl:when>
-		<xsl:when test="$first='2/8'">FEW</xsl:when>
-		<xsl:when test="$first='4/8'">SCT</xsl:when>
-		<xsl:when test="$first='6/8'">BKN</xsl:when>
-		<xsl:when test="$first='8/8'">OVC</xsl:when>
-		<xsl:when test="$first='9/8'">X</xsl:when>
+		<xsl:when test="$wert='0/8'">CLR</xsl:when>
+		<xsl:when test="$wert='1/8'">FEW</xsl:when>
+		<xsl:when test="$wert='2/8'">FEW</xsl:when>
+		<xsl:when test="$wert='3/8'">SCT</xsl:when>
+		<xsl:when test="$wert='4/8'">SCT</xsl:when>
+		<xsl:when test="$wert='5/8'">BKN</xsl:when>
+		<xsl:when test="$wert='6/8'">BKN</xsl:when>
+		<xsl:when test="$wert='7/8'">BKN</xsl:when>
+		<xsl:when test="$wert='8/8'">OVC</xsl:when>
+		<xsl:when test="$wert='9/8'">X</xsl:when>
 	</xsl:choose>
 </xsl:template>
 
