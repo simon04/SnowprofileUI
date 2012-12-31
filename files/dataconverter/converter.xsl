@@ -334,9 +334,7 @@
                         </MetaData>
                     </metaDataProperty>
                     <name>
-                        <xsl:value-of select="SPP-Profil/Kopf/Ort"/> -
-                        <xsl:value-of select="SPP-Profil/Kopf/Region"/> -
-                        <xsl:value-of select="SPP-Profil/Kopf/Bundesland"/>
+                        <xsl:value-of select="SPP-Profil/Kopf/Ort"/> - <xsl:value-of select="SPP-Profil/Kopf/Region"/> - <xsl:value-of select="SPP-Profil/Kopf/Bundesland"/>
                     </name>
                     <obsPointSubType>Snowprofile Site</obsPointSubType>
                     <validElevation>
