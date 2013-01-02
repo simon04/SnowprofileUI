@@ -90,7 +90,6 @@ Ext.define('LWD.view.snowprofile.snowprofilePreview' ,{
 	],
 	
     initComponent: function() {
-		var store = Ext.data.StoreManager.lookup('SnowprofilePreview');
 		this.on('edit', this.commit);
         this.callParent(arguments);
     },

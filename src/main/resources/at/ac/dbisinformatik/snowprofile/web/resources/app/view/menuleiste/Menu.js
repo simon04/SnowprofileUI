@@ -8,6 +8,8 @@ Ext.define('LWD.view.menuleiste.Menu', {
 		handler : function() {
 			var newToken = "";
 			Ext.History.add(newToken);
+			var store = Ext.data.StoreManager.lookup('SnowprofilePreview');
+			store.reload();
 		}
 	}, "-", {
 		text : 'PDF-Export',
