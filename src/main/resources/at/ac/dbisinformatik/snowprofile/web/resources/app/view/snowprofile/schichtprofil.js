@@ -194,7 +194,6 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             menuDisabled: true,
             editor: {
                 xtype: 'numberfield',
-                allowBlank: false,
                 minValue: 0
             }
         },
@@ -205,7 +204,6 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             menuDisabled: true,
             editor: {
                 xtype: 'numberfield',
-                allowBlank: false,
                 minValue: 0
             }
         },
