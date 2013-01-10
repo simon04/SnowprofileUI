@@ -49,12 +49,31 @@ var hardnessStore = Ext.create('Ext.data.Store', {
     ]
 });
 
+var handleGrainForm = function(editor, record) {
+    // Eislamelle: Größe ist Pflichtfeld, obwohl es bei Eislamellen keine Korngrößen gibt – wenn Eislamelle ausgewählt wurde, soll die Eingabe der Korngrößen gar nicht mehr möglich sein
+    var isIF = record == 'IF'; // Eislamelle
+    console.log(isIF);
+    Ext.each([
+        editor.down('field[name="grainSize_Components_avg"], [dataIndex="grainSize_Components_avg"]'),
+        editor.down('field[name="grainSize_Components_avgMax"], [dataIndex="grainSize_Components_avgMax"]')
+        ], function() {
+            var me = this.field || this;
+            console.log(me);
+            if (isIF && me.setValue) me.setValue(null);
+            me.setReadOnly(isIF);
+            me.allowBlank = isIF;
+        });
+    var secondary = editor.down('field[name="grainFormSecondary"], [dataIndex="grainFormSecondary"]');
+    secondary = secondary.field || secondary;
+    if (isIF) secondary.setValue('IF');
+    secondary.setReadOnly(isIF);
+};
+
 Ext.define('LWD.view.snowprofile.schichtprofil' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.schichtprofil',
     itemId: 'schichtprofilGrid',
     store: 'Schichtprofil',
-
     border: false,
 
     selType: 'rowmodel',
@@ -84,12 +103,21 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
         pluginId:'rowplugin'
     })],
 
+    listeners: {
+        beforeedit: function(editor, e) {
+            // editor.grid.down('[dataIndex="grainSize_Components_avg"]').field.allowBlank
+            console.log(e.grid, e.record.get('grainFormPrimary'));
+            handleGrainForm(editor.grid, e.record.get('grainFormPrimary'));
+        }
+    },
+
     columns: [
         {
             header: '<b>[H]</b><br>Oberkante [cm]',
             id: 'depthTop_content',
             dataIndex: 'depthTop_content',
             flex: 1,
+            menuDisabled: true,
             editor: {
                 xtype: 'numberfield',
                 allowBlank: false,
@@ -101,11 +129,11 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             dataIndex: 'lwc_content',
             renderer: renderValue(humidityDatastore),
             flex: 1,
+            menuDisabled: true,
             field: {
                 xtype: 'combobox',
                 editable: false,
                 matchFieldWidth: false,
-                typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
                 store: humidityDatastore,
@@ -121,19 +149,23 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             dataIndex: 'grainFormPrimary',
             renderer: renderValue(grainFormStore),
             flex: 1,
-            typeAhead: true,
+            menuDisabled: true,
             field: {
                 xtype: 'combobox',
                 editable: false,
                 matchFieldWidth: false,
-                typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
                 store: grainFormStore,
                 valueField: 'value',
                 displayField: 'display',
                 lazyRender: true,
-                listClass: 'x-combo-list-small'
+                listClass: 'x-combo-list-small',
+                listeners: {
+                    select: function(combo, record, index) {
+                        handleGrainForm(combo.up(), record[0].data.value);
+                    }
+                }
             }
         },
         {
@@ -141,11 +173,11 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             dataIndex: 'grainFormSecondary',
             renderer: renderValue(grainFormStore),
             flex: 1,
+            menuDisabled: true,
             field: {
                 xtype: 'combobox',
                 editable: false,
                 matchFieldWidth: false,
-                typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
                 store: grainFormStore,
@@ -156,9 +188,10 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[D–]</b><br>min. Größe [mm]',
+            header: '<b>[D]</b><br>min. Größe [mm]',
             dataIndex: 'grainSize_Components_avg',
             flex: 1,
+            menuDisabled: true,
             editor: {
                 xtype: 'numberfield',
                 allowBlank: false,
@@ -166,9 +199,10 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[–D]</b><br>max. Größe [mm]',
+            header: '<b>[D]</b><br>max. Größe [mm]',
             dataIndex: 'grainSize_Components_avgMax',
             flex: 1,
+            menuDisabled: true,
             editor: {
                 xtype: 'numberfield',
                 allowBlank: false,
@@ -182,11 +216,11 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             dataIndex: 'hardness',
             renderer: renderValue(hardnessStore),
             flex: 1,
+            menuDisabled: true,
             field: {
                 xtype: 'combobox',
                 editable: false,
                 matchFieldWidth: false,
-                typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
                 store: hardnessStore,

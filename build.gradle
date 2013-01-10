@@ -34,6 +34,10 @@ dependencies {
 
 }
 
+run {
+	systemProperties['snowprofile.home'] = System.properties['snowprofile.home']
+}
+
 test {
 	useTestNG()
 }

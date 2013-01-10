@@ -1,10 +1,10 @@
-var exposition = [
+var himmelsrichtungen = [
 	['N', 'Nord'],
 	['NE', 'Nordost'],
 	['E', 'Ost'],
 	['SE', 'Südost'],
 	['S', 'Süd'],
-	['SW', 'Südwest'],
+	['SW', 'Súdwest'],
 	['W', 'West'],
 	['NW', 'Nordwest']
 ];
@@ -16,17 +16,6 @@ var windgeschwindigkeit = [
 	['40_60', 'starker Wind (40–60 km/h)'],
 	['60_100', 'stürmischer Wind (60–100 km/h)'],
 	['100', 'schwerer Wind/Orkan (>100 km/h)']
-];
-
-var windrichtung = [
-	['N', 'Nord'],
-	['NE', 'Nordost'],
-	['E', 'Ost'],
-	['SE', 'Südost'],
-	['S', 'Süd'],
-	['SW', 'Südwest'],
-	['W', 'West'],
-	['NW', 'Nordwest']
 ];
 
 var niederschlag = [
