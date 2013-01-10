@@ -25,17 +25,18 @@ package at.ac.dbisinformatik.snowprofile.web;
  * 
  */
 
+import at.ac.dbisinformatik.snowprofile.app.Configuration;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
 public class SnowProfileComponent extends Component {
 
-	public SnowProfileComponent(Application application) {
+	public SnowProfileComponent(Application application, Configuration configuration) {
 		// Create a new Component.
 
-		// Add a new HTTP server listening on port 8080.
-		getServers().add(Protocol.HTTP, 8080);
+		// Add a new HTTP server listening on port specified in configuration.
+		getServers().add(Protocol.HTTP, Integer.parseInt(configuration.getValue("port")));
 
 		// Define CLAP-Protokoll
 		getClients().add(Protocol.CLAP);
