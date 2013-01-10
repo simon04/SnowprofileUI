@@ -4,3 +4,4 @@ target
 workspace
 *.class
 .gradle
+pom.xml
