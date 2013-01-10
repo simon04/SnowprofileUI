@@ -156,7 +156,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[D–]</b><br>min. Größe [mm]',
+            header: '<b>[D]</b><br>min. Größe [mm]',
             dataIndex: 'grainSize_Components_avg',
             flex: 1,
             menuDisabled: true,
@@ -167,7 +167,7 @@ Ext.define('LWD.view.snowprofile.schichtprofil' ,{
             }
         },
         {
-            header: '<b>[–D]</b><br>max. Größe [mm]',
+            header: '<b>[D]</b><br>max. Größe [mm]',
             dataIndex: 'grainSize_Components_avgMax',
             flex: 1,
             menuDisabled: true,
