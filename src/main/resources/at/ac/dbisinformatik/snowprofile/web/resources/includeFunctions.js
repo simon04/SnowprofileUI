@@ -186,7 +186,7 @@ function getJSON(store, pdfFlag, drawComponent)  {
 	items.push(drawText("F", (61 - pdfMarginX)+"%", yDescriptionText+"%", 0, "#000000", fontSize));
 	items.push(drawText("D", (65 - pdfMarginX)+"%", yDescriptionText+"%", 0, "#000000", fontSize));
 	items.push(drawText("K", (68.7 - pdfMarginX)+"%", yDescriptionText+"%", 0, "#000000", fontSize));
-	items.push(drawText("Niete", (70.5 - pdfMarginX)+"%", yDescriptionText+"%", 0, "#000000", fontSize));
+	items.push(drawText("Nieten", (70.5 - pdfMarginX)+"%", yDescriptionText+"%", 0, "#000000", fontSize));
 	items.push(drawText("Stabilitätstests", (76 - pdfMarginX)+"%", yDescriptionText+"%", 0, "#000000", fontSize));
 	
 	items.push(drawRectangle("0.5", "0.5%", (24.25 - pdfMarginX)+"%", yGraphMainArea+"%", 1, "#000000", "#ffffff", 1));
