@@ -46,7 +46,6 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				xtype : 'datefield',
 				name : 'profildatum',
 				fieldLabel : 'Profildatum',
-				format : "d.m.Y",
 				anchor : '95%',
 				allowBlank : false
 			}, {
@@ -64,7 +63,6 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				fieldLabel : 'Region',
 				name : 'region',
 				store : regionen,
-				typeAhead : true,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '95%'
@@ -115,8 +113,7 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				editable : false,
 				fieldLabel : 'Exposition',
 				name : 'exposition',
-				store : exposition,
-				typeAhead : true,
+				store : himmelsrichtungen,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '100%'
@@ -127,7 +124,6 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				fieldLabel : 'Windgeschwindigkeit',
 				name : 'windgeschwindigkeit',
 				store : windgeschwindigkeit,
-				typeAhead : true,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '100%'
@@ -136,8 +132,7 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				editable : false,
 				fieldLabel : 'Windrichtung',
 				name : 'windrichtung',
-				store : windrichtung,
-				typeAhead : true,
+				store : himmelsrichtungen,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '100%'
@@ -152,7 +147,6 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				fieldLabel : 'Niederschlag',
 				name : 'niederschlag',
 				store : niederschlag,
-				typeAhead : true,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '100%'
@@ -162,7 +156,6 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				fieldLabel : 'Intensit&auml;t des Niederschlags',
 				name : 'intensitaetDesNS',
 				store : intensitaetNiederschlag,
-				typeAhead : true,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '100%'
@@ -172,7 +165,6 @@ Ext.define('LWD.view.snowprofile.Metadata', {
 				fieldLabel : 'Bew&ouml;lkung',
 				name : 'bewoelkung',
 				store : bewoelkung,
-				typeAhead : true,
 				queryMode : 'local',
 				emptyText : 'Bitte wählen Sie…',
 				anchor : '100%'
